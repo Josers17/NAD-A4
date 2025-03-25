@@ -1,0 +1,12 @@
+# Ignore only the virtual environment files
+Lib/
+Scripts/
+pyvenv.cfg
+
+# Ignore common Python and Django files you don't want on GitHub
+__pycache__/
+*.pyc
+*.pyo
+*.sqlite3
+.env
+*.log
