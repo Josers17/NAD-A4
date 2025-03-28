@@ -13,9 +13,11 @@ posts
     <!-- {% for obj in qs %}
         {{obj.title}} - {{obj.body}} <br>
     {% endfor %} -->
+    <div id="posts-box"></div>
     <div id="spinner-box" class="text-center">
         <div class="spinner-border" role="status"></div>
     </div>
-    <div id="posts-box"></div>
-    <div id="hello-world"></div>
+    <div class="text-center mb-3" id="end-box">
+        <button class="btn btn-primary" id="load-btn">Load more</button>
+    </div>
 {% endblock content %}
