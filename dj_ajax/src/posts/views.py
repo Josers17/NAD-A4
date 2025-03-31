@@ -98,6 +98,6 @@ def update_post(request, pk):
 
 def delete_post(request, pk):
     obj = Post.objects.get(pk=pk)
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         obj.delete()
     return JsonResponse({})
