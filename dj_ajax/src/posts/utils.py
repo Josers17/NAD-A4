@@ -12,5 +12,7 @@ def action_permission(func):
             return func(request, **kwargs)
         else:
             print('no')
-            return HttpResponse('access denied - you need to be the author of the post in order to delete it')
+            # return HttpResponse('access denied - you need to be the author of the post in order to delete it')
+            return redirect('posts:main-board')
+    
     return wrapper
