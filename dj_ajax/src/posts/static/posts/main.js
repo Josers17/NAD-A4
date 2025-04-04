@@ -70,9 +70,11 @@ const likeUnlikePosts = ()=> {
 let visible = 3
 
 const getData = () => {
+    const order = document.getElementById('order')?.value || 'created';
     $.ajax({
     type: 'GET',
-    url: `/data/${visible}/`,
+    // url: `/data/${visible}/`,
+    url: `/data/${visible}/?order=${order}`,
     success: function(response){
         console.log(response)
         const data = response.data
@@ -84,6 +86,7 @@ const getData = () => {
                 <div class="card mb-2">
                     <div class="card-body">
                         <h5 class="card-title">${el.title}</h5>
+                        <p class="text-muted">Posted on: ${el.created}</p
                         <p class="card-text">${el.body}</p>
                     </div>
                     <div class="card-footer">
@@ -196,5 +199,17 @@ const myDropzone = new Dropzone('#my-dropzone', {
     maxFilesize: 4,
     acceptedFiles: '.png, .jpg, .jpeg'
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+const orderSelect = document.getElementById('order');
+    if (orderSelect) {
+        orderSelect.addEventListener('change', function () {
+            document.getElementById('posts-box').innerHTML = ''; 
+            visible = 3; 
+            getData();
+        });
+    }
+});
+
     
 getData()

@@ -39,6 +39,16 @@ posts
         </div>
     </div>
 
+    <form id="order-form" class="mb-3">
+        <label for="order">Sort by:</label>
+        <select name="order" id="order">
+            <option value="-created">Date (newest first)</option>
+            <option value="created">Date (oldest first)</option>
+            <option value="title">Title (A–Z)</option>
+            <option value="-title">Title (Z–A)</option>
+        </select>
+    </form>
+        
     <div id="alert-box"></div>
     <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addPostModal">
         add post

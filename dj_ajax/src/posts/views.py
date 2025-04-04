@@ -49,8 +49,9 @@ def load_post_data_view(request, num_posts):
         upper = num_posts
         lower = upper - visible
         size = Post.objects.all().count()
-
-        qs = Post.objects.all()
+        # qs = Post.objects.all()
+        order = request.GET.get('order', 'created')
+        qs = Post.objects.all().order_by(order)
         data = []
         for obj in qs:
             item = {
@@ -59,7 +60,8 @@ def load_post_data_view(request, num_posts):
                 'body': obj.body,
                 'liked': True if request.user in obj.liked.all() else False,
                 'count': obj.like_count,
-                'author': obj.author.user.username
+                'author': obj.author.user.username,
+                'created': obj.created.strftime('%Y-%m-%d %H:%M'),
             }
             data.append(item)
         return JsonResponse({'data':data[lower:upper], 'size': size})
