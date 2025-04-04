@@ -48,10 +48,17 @@ def load_post_data_view(request, num_posts):
         visible = 3
         upper = num_posts
         lower = upper - visible
-        size = Post.objects.all().count()
+
+        # size = Post.objects.all().count()
         # qs = Post.objects.all()
+        # order = request.GET.get('order', 'created')
+        # qs = Post.objects.all().order_by(order)
+        
+        q = request.GET.get('q', '')
         order = request.GET.get('order', 'created')
-        qs = Post.objects.all().order_by(order)
+        qs = Post.objects.filter(title__icontains=q).order_by(order)
+        size = qs.count()
+
         data = []
         for obj in qs:
             item = {

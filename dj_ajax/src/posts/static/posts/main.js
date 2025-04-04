@@ -66,6 +66,17 @@ const likeUnlikePosts = ()=> {
     }))
 }
 
+let searchQuery = '';
+const searchInput = document.getElementById('search-input');
+
+if (searchInput) {
+    searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value;
+        postsBox.innerHTML = '';
+        visible = 3;
+        getData();
+    });
+}
 
 let visible = 3
 
@@ -74,7 +85,8 @@ const getData = () => {
     $.ajax({
     type: 'GET',
     // url: `/data/${visible}/`,
-    url: `/data/${visible}/?order=${order}`,
+    // url: `/data/${visible}/?order=${order}`,
+    url: `/data/${visible}/?order=${order}&q=${searchQuery}`,
     success: function(response){
         console.log(response)
         const data = response.data
