@@ -5,6 +5,8 @@ from .forms import PostForm
 from profiles.models import Profile
 from .utils import action_permission
 from django.contrib.auth.decorators import login_required
+from django.utils.timezone import localtime
+
 # Create your views here.
 
 @login_required
@@ -23,6 +25,7 @@ def post_list_and_create(request):
                 'body': instance.body,
                 'author': instance.author.user.username,
                 'id': instance.id,
+                'created': localtime(instance.created).strftime('%Y-%m-%d %H:%M'),
             })
 
     context = {
@@ -68,7 +71,7 @@ def load_post_data_view(request, num_posts):
                 'liked': True if request.user in obj.liked.all() else False,
                 'count': obj.like_count,
                 'author': obj.author.user.username,
-                'created': obj.created.strftime('%Y-%m-%d %H:%M'),
+                'created': localtime(obj.created).strftime('%Y-%m-%d %H:%M'),
             }
             data.append(item)
         return JsonResponse({'data':data[lower:upper], 'size': size})
